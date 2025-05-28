@@ -1,0 +1,163 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar-container" (click)="openAvatarSelector()">
+        <img [src]="selectedAvatar || 'http://localhost:8080/avatars/default.png'" alt="Profile Avatar" class="avatar">
+        <div class="avatar-overlay">
+          <span class="change-avatar-text">Change Avatar</span>
+        </div>
+      </div>
+      <h2>Profile</h2>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner">Loading...</div>
+    </div>
+
+    <div *ngIf="!isLoading && userInfo" class="profile-content">
+      <div class="info-row">
+        <span>First Name:</span>
+        <span>{{ userInfo.firstname }}</span>
+      </div>
+      <div class="info-row">
+        <span>Last Name:</span>
+        <span>{{ userInfo.lastname }}</span>
+      </div>
+      <div class="info-row">
+        <span>Email:</span>
+        <span>{{ userInfo.email }}</span>
+      </div>
+      <div class="info-row">
+        <span>Balance:</span>
+        <span class="balance">{{ userInfo.balance }} EUR</span>
+      </div>
+      <div class="balance-actions">
+        <button (click)="addBalance()" [disabled]="isLoading" class="add-balance-btn">
+          <span class="btn-icon">+</span>
+          <span class="btn-text">{{ isLoading ? 'Adding...' : 'Add €100 to Balance' }}</span>
+        </button>
+      </div>
+      <div class="info-row">
+        <span>Link:</span>
+        <div class="link-container">
+          <span>{{ userInfo.publicLink }}</span>
+          <button class="edit-link-btn" (click)="toggleLinkEdit()">
+            <span class="btn-icon">✎</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="update-section" *ngIf="isEditingLink">
+        <p class="link-description">Here you can change your public link</p>
+        <input 
+          type="text"
+          [value]="newLink"
+          (input)="onInput($event)"
+          placeholder="New link"
+          [disabled]="isLoading"
+          class="link-input"
+        >
+        <div class="error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+        <div class="balance-actions">
+          <button 
+            (click)="updateLink()" 
+            [disabled]="isLoading"
+            class="add-balance-btn"
+          >
+            <span class="btn-icon">✓</span>
+            <span class="btn-text">{{ isLoading ? 'Saving...' : 'Save' }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="avatar-selector" *ngIf="showAvatarSelector" (click)="closeAvatarSelector()">
+  <div class="avatar-grid" (click)="$event.stopPropagation()">
+    <div *ngFor="let avatar of avatars" 
+         class="avatar-option" 
+         [class.selected]="avatar === selectedAvatar"
+         (click)="selectAvatar(avatar)">
+      <img [src]="avatar" alt="Avatar option" class="avatar">
+    </div>
+  </div>
+</div>
+
+<div class="space-animation">
+  <svg id="rt" viewBox="-500 -500 1000 1000">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="7"></feGaussianBlur>
+      </filter>
+
+      <filter id="dropGlow" width="1.5" height="1.5" x="-.25" y="-.25">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="20.000000" result="blur"/>
+        <feColorMatrix result="bluralpha" type="matrix" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 0.900000 0 "/>
+        <feOffset in="bluralpha" dx="0.000000" dy="0.000000" result="offsetBlur"/>
+        <feMerge>
+          <feMergeNode in="offsetBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <radialGradient id="sunGrad">
+        <stop offset="10%" stop-color="white" stop-opacity="1"/>
+        <stop offset="30%" stop-color="yellow" stop-opacity="0.7"/>
+        <stop offset="70%" stop-color="yellow" stop-opacity="0.2"/>
+      </radialGradient>
+
+      <radialGradient id="earthGrad">
+        <stop offset="0%" style="stop-color:rgb(66, 232, 244); stop-opacity:1" />
+        <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:0.7" />
+      </radialGradient>
+
+      <radialGradient id="marsGrad">
+        <stop offset="0%" style="stop-color:rgb(247, 156, 131); stop-opacity:1" />
+        <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:0.7" />
+      </radialGradient>
+    </defs>
+
+    <g id="sunOrbitVelocity">
+      <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="5s" repeatCount="indefinite"/>
+
+      <g id="sunOrbitRadius" transform="translate(300,0)">
+        <circle id="sun" r="65" fill="url(#sunGrad)" filter="url(#blur)" />
+        
+        <g id="earthOrbitVelocity">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="3s" repeatCount="indefinite"/>
+          
+          <g id="earthOrbitRadius" transform="translate(120,0)">
+            <circle id="earth" r="20" fill="url(#earthGrad)">
+              <animateTransform attributeType="xml" attributeName="transform" type="skewX" values="0;0;-70;0;0" keyTimes="0;0.25;0.5;0.75;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            
+            <g id="moonOrbitVelocity">
+              <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="0.5s" repeatCount="indefinite"/>
+            
+              <g id="moonOrbitRadius" transform="translate(50,0)">
+                <circle id="moon" r="7" fill="lightgray">
+                  <animateTransform attributeType="xml" attributeName="transform" type="skewX" values="0;0;-70;0;0" keyTimes="0;0.25;0.5;0.75;1" dur="3s" repeatCount="indefinite"/>
+                </circle>
+              </g>          
+            </g>
+          </g>
+        </g>
+        <g id="marsOrbitVelocity">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="2s" repeatCount="indefinite"/>
+          
+          <g id="marsOrbitRadius" transform="translate(180,0)">
+            <circle id="mars" r="15" fill="url(#marsGrad)">
+              <animateTransform attributeType="xml" attributeName="transform" type="skewX" values="0;60;0" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+        </g>
+      </g>
+    </g>
+    
+    <circle id="blackHole" r="60" fill="black" filter="url(#dropGlow)"/>
+  </svg>
+</div>
+

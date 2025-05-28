@@ -1,0 +1,71 @@
+<div class="tips-container">
+  <div class="tabs-header">
+    <button mat-button [class.active]="selectedTab === 0" (click)="onTabChange(0)">
+      Received Tips
+    </button>
+    <button mat-button [class.active]="selectedTab === 1" (click)="onTabChange(1)">
+      Sent Tips
+    </button>
+  </div>
+
+  <div class="tips-content">
+    <div *ngIf="isLoading" class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <ng-container *ngIf="selectedTab === 0">
+      <div *ngIf="!isLoading && receivedTips.length === 0" class="no-tips">
+        You haven't received any tips yet
+      </div>
+
+      <mat-card *ngFor="let tip of receivedTips" class="tip-card">
+        <mat-card-content>
+          <div class="tip-header">
+            <div class="tip-amount">{{ tip.amount }} €</div>
+            <div class="tip-date">{{ formatDate(tip.createdAt) }}</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="tip-message">{{ tip.message }}</div>
+          <div class="tip-sender" *ngIf="tip.sender">
+            From: {{ tip.sender.firstname }} {{ tip.sender.lastname }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="selectedTab === 1">
+      <div *ngIf="!isLoading && sentTips.length === 0" class="no-tips">
+        You haven't sent any tips yet
+      </div>
+
+      <mat-card *ngFor="let tip of sentTips" class="tip-card">
+        <mat-card-content>
+          <div class="tip-header">
+            <div class="tip-amount">{{ tip.amount }} €</div>
+            <div class="tip-date">{{ formatDate(tip.createdAt) }}</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="tip-message">{{ tip.message }}</div>
+          <div class="tip-receiver" *ngIf="tip.receiver">
+            To: {{ tip.receiver.firstname }} {{ tip.receiver.lastname }}
+          </div>
+          <div class="tip-actions" *ngIf="tip.receiver">
+            <button mat-button color="primary" (click)="sendTipAgain(tip.receiver.publicLink)">
+              Send Again
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>
+
+<div class="space-animation">
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+</div> 

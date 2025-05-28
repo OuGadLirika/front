@@ -1,0 +1,85 @@
+<div class="home-container">
+  <div class="background-gradient">
+    <img class="bg-image main-bg" src="assets/images/background/mobile-bg-0_1.webp" loading="lazy" alt="bg-image">
+    <img class="bg-image overlay-bg" src="assets/images/background/mobile-bg-1_1.webp" loading="lazy" alt="bg-image">
+  </div>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="glitch-text">FINSYN Tips Platform</h1>
+      <p class="subtitle">Send and receive tips</p>
+      <div class="cta-buttons">
+        <button mat-raised-button class="primary-btn" routerLink="/send-tip">Get Started</button>
+        <a mat-stroked-button class="secondary-btn" href="https://github.com/OuGadLirika/finsyn" target="_blank">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-animation">
+      <img class="unicorn-animation" src="assets/images/background/main-bg-3.png" alt="unicorn">
+    </div>
+  </div>
+
+  <div class="why-choose-section">
+    <div class="section-header">
+      <h2>Why Choose Us</h2>
+      <p class="section-subtitle">Experience the future of tipping</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of features">
+        <div class="feature-icon">{{feature.icon}}</div>
+        <h3>{{feature.title}}</h3>
+        <p>{{feature.description}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item" *ngFor="let stat of stats">
+        <div class="stat-number">{{stat.value}}</div>
+        <div class="stat-label">{{stat.label}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="partners-section">
+    <div class="section-header">
+      <h2>Our Partner</h2>
+      <p class="section-subtitle">Trusted by industry leaders</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-logo" *ngFor="let partner of partners">
+        <img [src]="partner.logo" [alt]="partner.name">
+      </div>
+    </div>
+  </div>
+
+  <div class="roadmap-section">
+    <div class="section-header">
+      <h2>Roadmap</h2>
+      <p class="section-subtitle">Our journey to revolutionize tipping</p>
+    </div>
+    <div class="roadmap-timeline">
+      <div class="roadmap-item" *ngFor="let item of roadmap">
+        <div class="roadmap-date">{{item.date}}</div>
+        <div class="roadmap-content">
+          <h3>{{item.title}}</h3>
+          <p>{{item.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-content">
+      <h2>Ready to Start?</h2>
+      <p>Join thousands of users already tipping with crypto</p>
+      <button mat-raised-button class="primary-btn" routerLink="/send-tip">Get Started Now</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      Made with <span class="heart">❤</span> by FinSyn Team
+    </div>
+  </footer>
+</div>

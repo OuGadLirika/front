@@ -1,0 +1,88 @@
+<div class="user-info-container">
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="userInfo" class="user-info">
+    {{ userInfo }}
+  </div>
+
+  <div class="connection-status">
+    <p class="success-message">Connection test completed successfully</p>
+  </div>
+</div>
+
+<div class="space-animation">
+  <svg id="rt" viewBox="-500 -500 1000 1000">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="7"></feGaussianBlur>
+      </filter>
+
+      <filter id="dropGlow" width="1.5" height="1.5" x="-.25" y="-.25">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="20.000000" result="blur"/>
+        <feColorMatrix result="bluralpha" type="matrix" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 0.900000 0 "/>
+        <feOffset in="bluralpha" dx="0.000000" dy="0.000000" result="offsetBlur"/>
+        <feMerge>
+          <feMergeNode in="offsetBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <radialGradient id="sunGrad">
+        <stop offset="10%" stop-color="white" stop-opacity="1"/>
+        <stop offset="30%" stop-color="yellow" stop-opacity="0.7"/>
+        <stop offset="70%" stop-color="yellow" stop-opacity="0.2"/>
+      </radialGradient>
+
+      <radialGradient id="earthGrad">
+        <stop offset="0%" style="stop-color:rgb(66, 232, 244); stop-opacity:1" />
+        <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:0.7" />
+      </radialGradient>
+
+      <radialGradient id="marsGrad">
+        <stop offset="0%" style="stop-color:rgb(247, 156, 131); stop-opacity:1" />
+        <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:0.7" />
+      </radialGradient>
+    </defs>
+
+    <g id="sunOrbitVelocity">
+      <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="5s" repeatCount="indefinite"/>
+
+      <g id="sunOrbitRadius" transform="translate(300,0)">
+        <circle id="sun" r="65" fill="url(#sunGrad)" filter="url(#blur)" />
+        
+        <g id="earthOrbitVelocity">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="3s" repeatCount="indefinite"/>
+          
+          <g id="earthOrbitRadius" transform="translate(120,0)">
+            <circle id="earth" r="20" fill="url(#earthGrad)">
+              <animateTransform attributeType="xml" attributeName="transform" type="skewX" values="0;0;-70;0;0" keyTimes="0;0.25;0.5;0.75;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            
+            <g id="moonOrbitVelocity">
+              <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="0.5s" repeatCount="indefinite"/>
+            
+              <g id="moonOrbitRadius" transform="translate(50,0)">
+                <circle id="moon" r="7" fill="lightgray">
+                  <animateTransform attributeType="xml" attributeName="transform" type="skewX" values="0;0;-70;0;0" keyTimes="0;0.25;0.5;0.75;1" dur="3s" repeatCount="indefinite"/>
+                </circle>
+              </g>          
+            </g>
+          </g>
+        </g>
+        <g id="marsOrbitVelocity">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="2s" repeatCount="indefinite"/>
+          
+          <g id="marsOrbitRadius" transform="translate(180,0)">
+            <circle id="mars" r="15" fill="url(#marsGrad)">
+              <animateTransform attributeType="xml" attributeName="transform" type="skewX" values="0;60;0" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+        </g>
+      </g>
+    </g>
+    
+    <circle id="blackHole" r="60" fill="black" filter="url(#dropGlow)"/>
+  </svg>
+</div>

@@ -1,0 +1,260 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Глобальные стили */
+:root {
+  --primary-gradient: linear-gradient(135deg, #00ff9d, #00cc7e);
+  --dark-bg: #0a0a0a;
+  --card-bg: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --neon-glow: 0 0 20px rgba(0, 255, 157, 0.3);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', monospace;
+  min-height: 100vh;
+}
+
+/* Стили для карточек */
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--neon-glow);
+}
+
+/* Стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--primary-gradient);
+  -webkit-text-fill-color: transparent;
+  text-shadow: var(--neon-glow);
+}
+
+/* Стили для кнопок */
+button {
+  font-family: 'Roboto Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Стили для форм */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text-primary);
+  padding: 12px;
+  font-family: 'Roboto Mono', monospace;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #00ff9d;
+  box-shadow: var(--neon-glow);
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff9d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc7e;
+}
+
+/* Анимации */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 255, 157, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 157, 0);
+  }
+}
+
+/* Стили для таблиц */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+  background: rgba(0, 255, 157, 0.1);
+  color: #00ff9d;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Стили для уведомлений */
+.notification {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.notification.success {
+  background: rgba(0, 255, 157, 0.1);
+  border: 1px solid rgba(0, 255, 157, 0.2);
+  color: #00ff9d;
+}
+
+.notification.error {
+  background: rgba(255, 77, 77, 0.1);
+  border: 1px solid rgba(255, 77, 77, 0.2);
+  color: #ff4d4d;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body.dark-theme {
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+}
+
+/* Dark theme overrides for Material components */
+.dark-theme {
+  --primary-color: #00ff9d;
+  --primary-variant: #00cc7e;
+  --secondary-color: #00ff9d;
+  --background-color: var(--dark-bg);
+  --surface-color: var(--card-bg);
+  --error-color: #ff4d4d;
+  --on-primary: #000;
+  --on-secondary: #000;
+  --on-background: #fff;
+  --on-surface: #fff;
+  --on-error: #000;
+}
+
+/* Navigation container styles */
+.dark-theme .nav-container {
+  background-color: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Profile container styles */
+/* .dark-theme .profile-container {
+    background-color: var(--background-color);
+} */
+
+.dark-theme .mat-mdc-card {
+  background-color: var(--surface-color);
+  color: var(--on-surface);
+}
+
+.dark-theme .mat-mdc-form-field {
+  --mdc-filled-text-field-container-color: #2d2d2d;
+  --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color);
+  --mdc-filled-text-field-hover-state-layer-color: rgba(255, 255, 255, 0.05);
+  --mdc-filled-text-field-focus-state-layer-color: rgba(255, 255, 255, 0.1);
+  --mdc-filled-text-field-label-text-color: rgba(255, 255, 255, 0.6);
+  --mdc-filled-text-field-input-text-color: #fff;
+}
+
+.dark-theme .mat-mdc-button {
+  --mdc-filled-button-container-color: var(--primary-color);
+  --mdc-filled-button-label-text-color: var(--on-primary);
+}
+
+.dark-theme .mat-mdc-raised-button {
+  --mdc-protected-button-container-color: var(--primary-color);
+  --mdc-protected-button-label-text-color: var(--on-primary);
+}
+
+.dark-theme .mat-mdc-outlined-button {
+  --mdc-outlined-button-outline-color: var(--primary-color);
+  --mdc-outlined-button-label-text-color: var(--primary-color);
+}
+
+.dark-theme .mat-mdc-tab {
+  --mdc-tab-indicator-active-indicator-color: var(--primary-color);
+  --mat-tab-header-active-label-text-color: var(--primary-color);
+  --mat-tab-header-active-ripple-color: var(--primary-color);
+  --mat-tab-header-inactive-label-text-color: rgba(255, 255, 255, 0.6);
+  --mat-tab-header-active-background-color: transparent;
+  --mat-tab-header-inactive-background-color: transparent;
+}
+
+.dark-theme .mat-mdc-divider {
+  --mdc-divider-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Custom scrollbar for dark theme */
+.dark-theme ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+.content {
+  padding: 0;
+}
+
+main {
+  padding: 0 !important;
+}

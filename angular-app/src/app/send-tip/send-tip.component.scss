@@ -1,0 +1,129 @@
+.send-tip-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  mat-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    mat-card-header {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+
+      mat-card-title {
+        font-size: 1.5rem;
+        color: #333;
+        margin: 0;
+      }
+    }
+
+    mat-card-content {
+      padding: 0 1rem 1rem;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        mat-form-field {
+          .mat-mdc-form-field-subscript-wrapper {
+            display: none;
+          }
+
+          .mat-mdc-form-field-infix {
+            padding: 0.5rem 0;
+          }
+
+          .mat-mdc-text-field-wrapper {
+            background: #f8f9fa;
+            border-radius: 8px;
+          }
+
+          .mat-mdc-form-field-flex {
+            padding: 0 0.75rem;
+          }
+
+          mat-label {
+            color: #666;
+            font-size: 0.9rem;
+          }
+
+          input, textarea {
+            font-size: 1rem;
+            color: #333;
+          }
+
+          mat-icon {
+            color: #666;
+          }
+        }
+
+        .error-message {
+          color: #d32f2f;
+          font-size: 0.9rem;
+          margin-top: -1rem;
+        }
+
+        .success-message {
+          color: #2e7d32;
+          font-size: 0.9rem;
+          margin-top: -1rem;
+        }
+
+        .button-container {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: flex-end;
+
+          button {
+            min-width: 120px;
+            height: 40px;
+            font-size: 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            .spinner {
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Стили для темной темы
+:host-context(.dark-theme) {
+  .send-tip-container {
+    mat-card {
+      background: #2d2d2d;
+
+      mat-card-title {
+        color: #fff;
+      }
+
+      mat-form-field {
+        .mat-mdc-text-field-wrapper {
+          background: #3d3d3d;
+        }
+
+        mat-label {
+          color: #bbb;
+        }
+
+        input, textarea {
+          color: #fff;
+        }
+
+        mat-icon {
+          color: #bbb;
+        }
+      }
+    }
+  }
+} 
