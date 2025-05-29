@@ -1,1 +1,0 @@
-ALTER TABLE tip DROP COLUMN IF EXISTS user_email; 
